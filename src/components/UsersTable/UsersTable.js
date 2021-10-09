@@ -16,36 +16,34 @@ const UsersTable = (props) => {
     };
 
     return (
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Total Expenses</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.usersList.map((user, idx) => (
-                        <Fragment key={idx}>
-                            {editUserRowID === user.id ? (
-                                <EditUserRow
-                                    saveClickHandler={saveClickHandler}
-                                    editUser={props.editUser}
-                                    user={user}
-                                />
-                            ) : (
-                                <ReadUserRow
-                                    user={user}
-                                    editUserHandler={editUserHandler}
-                                    deleteUserHandler={props.deleteUserHandler}
-                                />
-                            )}
-                        </Fragment>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Total Expenses</th>
+                </tr>
+            </thead>
+            <tbody>
+                {props.usersList.map((user, idx) => (
+                    <Fragment key={idx}>
+                        {editUserRowID === user.id ? (
+                            <EditUserRow
+                                saveClick={saveClickHandler}
+                                editUser={props.editUser}
+                                user={user}
+                            />
+                        ) : (
+                            <ReadUserRow
+                                user={user}
+                                editUser={editUserHandler}
+                                deleteUser={props.deleteUser}
+                            />
+                        )}
+                    </Fragment>
+                ))}
+            </tbody>
+        </table>
     );
 };
 

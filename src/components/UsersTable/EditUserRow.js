@@ -26,7 +26,7 @@ const EditUserRow = (props) => {
             totalExpenses: props.user.totalExpenses,
         };
         props.editUser(editUserData);
-        props.saveClickHandler(event);
+        props.saveClick(event);
     };
 
 

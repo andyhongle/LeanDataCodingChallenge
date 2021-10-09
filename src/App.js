@@ -1,10 +1,13 @@
 import "./App.css";
 import React, { useState } from "react";
 import UsersTable from "./components/UsersTable/UsersTable";
-import UsersForm from "./components/UsersTable/UsersForm";
+import AddUsersForm from "./components/UsersTable/AddUserForm";
+import ExpensesTable from './components/ExpensesTable/ExpensesTable';
+import AddExpenseForm from './components/ExpensesTable/AddExpenseForm';
 
 function App() {
     const [usersList, setUsersList] = useState([]);
+    const [expensesList, setExpensesList] = useState([]);
 
     const addUserHandler = (firstName, lastName, totalExpenses) => {
         setUsersList((prevUsersList) => {
@@ -40,14 +43,31 @@ function App() {
         });
     };
 
+    const addExpenseHandler = (fullName, category, description, cost) => {
+      setExpensesList((prevExpensesList) => {
+        return [
+          ...prevExpensesList,
+          {
+            id: Math.random(),
+            fullName: fullName,
+            category: category,
+            description: description,
+            cost: cost
+          }
+        ]
+      })
+    }
+
     return (
         <div className="App">
-            <UsersForm addUser={addUserHandler} />
+            <AddUsersForm addUser={addUserHandler} />
             <UsersTable
                 usersList={usersList}
                 editUser={editUserHandler}
-                deleteUserHandler={deleteUserHandler}
+                deleteUser={deleteUserHandler}
             />
+            <AddExpenseForm/>
+            <ExpensesTable />
         </div>
     );
 }

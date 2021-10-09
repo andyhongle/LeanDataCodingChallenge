@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const UsersForm = (props) => {
+const AddUserForm = (props) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
 
@@ -38,4 +38,4 @@ const UsersForm = (props) => {
     );
 };
 
-export default UsersForm;
+export default AddUserForm;

@@ -3,11 +3,11 @@ import React from 'react';
 const ReadUserRow = (props) => {
 
     const onEditClickHandler = (event) => {
-        props.editUserHandler(event, props.user);
+        props.editUser(event, props.user);
     }
 
     const onDeleteUserHandler = () => {
-        props.deleteUserHandler(props.user.id);
+        props.deleteUser(props.user.id);
     }
 
     return (

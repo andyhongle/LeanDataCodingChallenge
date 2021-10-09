@@ -51,7 +51,7 @@ const EditUserRow = (props) => {
                     onChange={changeLNHandler}
                 />
             </td>
-            <td>filler</td>
+            <td>{props.user.totalExpenses}</td>
             <td>
                 <button type='button' onClick={onSaveHandler}>
                     Save

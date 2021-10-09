@@ -17,8 +17,9 @@ function App() {
                     id: Math.random(),
                     firstName: firstName,
                     lastName: lastName,
-                    totalExpenses: "testing",
+                    totalExpenses: parseInt(0),
                 },
+              
             ];
         });
     };
@@ -66,7 +67,7 @@ function App() {
                 editUser={editUserHandler}
                 deleteUser={deleteUserHandler}
             />
-            <AddExpenseForm/>
+            <AddExpenseForm usersList={usersList}/>
             <ExpensesTable />
         </div>
     );

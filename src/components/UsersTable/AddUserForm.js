@@ -20,7 +20,7 @@ const AddUserForm = (props) => {
     };
 
     return (
-        <form onSubmit={submitHandler}>
+        <form className="input-form-user" onSubmit={submitHandler}>
             <input
                 type="text"
                 placeholder="First Name"

@@ -2,7 +2,7 @@ import React from "react";
 
 const CompanyTable = (props) => {
     return (
-        <table>
+        <table className='table'>
             <thead>
                 <tr>
                     <th>Category</th>

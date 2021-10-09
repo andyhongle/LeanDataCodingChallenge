@@ -30,8 +30,8 @@ const AddExpenseForm = (props) => {
         setCost(0);
     }
     return (
-        <form onSubmit={submitHandler}>
-            <select value={fullName} onChange={selectFullNameHandler}>
+        <form className='input-form-expense' onSubmit={submitHandler}>
+            <select required value={fullName} onChange={selectFullNameHandler}>
                 <option value="" disabled hidden>
                     Choose a name
                 </option>
@@ -41,7 +41,7 @@ const AddExpenseForm = (props) => {
                     </option>
                 ))}
             </select>
-            <select value={category} onChange={selectCategoryHandler}>
+            <select required value={category} onChange={selectCategoryHandler}>
                 <option value="" disabled hidden>
                     Choose a category
                 </option>

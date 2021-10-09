@@ -41,7 +41,7 @@ const EditExpenseRow = (props) => {
     return (
         <tr>
             <td>
-                <select value={fullName} onChange={changeFullNameHandler}>
+                <select required value={fullName} onChange={changeFullNameHandler}>
                     <option value="" disabled hidden>
                         Choose a name
                     </option>
@@ -53,7 +53,7 @@ const EditExpenseRow = (props) => {
                 </select>
             </td>
             <td>
-                <select value={category} onChange={changeCategoryHandler}>
+                <select required value={category} onChange={changeCategoryHandler}>
                     <option value="" disabled hidden>
                         Choose a category
                     </option>

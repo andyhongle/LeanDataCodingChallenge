@@ -122,12 +122,14 @@ function App() {
 
     return (
         <div className="App">
+            <h2>Users Table</h2>
             <AddUsersForm addUser={addUserHandler} />
             <UsersTable
                 usersList={usersList}
                 editUser={editUserHandler}
                 deleteUser={deleteUserHandler}
             />
+            <h2>Expense Table</h2>
             <AddExpenseForm
                 usersList={usersList}
                 addExpense={addExpenseHandler}
@@ -138,6 +140,7 @@ function App() {
                 editExpense={editExpenseHandler}
                 deleteExpense={deleteExpenseHandler}
             />
+            <h2>Company Expenses Table</h2>
             <CompanyTable categoryExpenses={categoryExpenses} />
         </div>
     );

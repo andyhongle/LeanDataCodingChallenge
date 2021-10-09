@@ -16,7 +16,7 @@ const UsersTable = (props) => {
     };
 
     return (
-        <table>
+        <table className="table">
             <thead>
                 <tr>
                     <th>First Name</th>

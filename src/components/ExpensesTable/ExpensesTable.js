@@ -16,7 +16,7 @@ const ExpensesTable = (props) => {
     };
 
     return (
-        <table>
+        <table className="table">
             <thead>
                 <tr>
                     <th>Full Name</th>

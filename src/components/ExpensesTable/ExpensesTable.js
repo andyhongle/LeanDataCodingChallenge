@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { Fragment } from 'react';
+import ReadExpenseRow from './ReadExpenseRow';
 const ExpensesTable = (props) => {
     return (
         <table>
@@ -12,7 +12,11 @@ const ExpensesTable = (props) => {
                 </tr>
             </thead>
             <tbody>
-
+                {props.expensesList.map((expense, idx) => (
+                    <Fragment key={idx}>
+                        <ReadExpenseRow expense={expense}/>
+                    </Fragment>
+                ))}
             </tbody>
         </table>
     );

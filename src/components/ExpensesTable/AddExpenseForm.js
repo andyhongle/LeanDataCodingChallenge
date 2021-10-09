@@ -20,26 +20,33 @@ const AddExpenseForm = (props) => {
     const costChangeHandler = (event) => {
         setCost(event.target.value);
     };
+
+    const submitHandler = (event) => {
+        event.preventDefault();
+        props.addExpense(fullName, category, description, cost)
+        
+
+    }
     return (
-        <form>
+        <form onSubmit={submitHandler}>
             <select value={fullName} onChange={selectFullNameHandler}>
-                <option value="" disabled selected hidden>
+                <option value="" disabled hidden>
                     Choose a name
                 </option>
                 {props.usersList.map((user, idx) => (
-                    <option key={idx} value="fullName">
+                    <option key={idx} value={user.fullName}>
                         {user.firstName} {user.lastName}
                     </option>
                 ))}
             </select>
             <select value={category} onChange={selectCategoryHandler}>
-                <option value="" disabled selected hidden>
+                <option value="" disabled hidden>
                     Choose a category
                 </option>
-                <option value="food">Food</option>
-                <option value="travel">Travel</option>
-                <option value="health">Health</option>
-                <option value="supplies">Supplies</option>
+                <option value="Food">Food</option>
+                <option value="Travel">Travel</option>
+                <option value="Health">Health</option>
+                <option value="Supplies">Supplies</option>
             </select>
             <input
                 type="text"
@@ -55,6 +62,7 @@ const AddExpenseForm = (props) => {
                 value={cost}
                 onChange={costChangeHandler}
             />
+            <button type='submit'>Add Expense</button>
         </form>
     );
 };

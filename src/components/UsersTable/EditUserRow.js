@@ -53,7 +53,7 @@ const EditUserRow = (props) => {
             </td>
             <td>{props.user.totalExpenses}</td>
             <td>
-                <button type='button' onClick={onSaveHandler}>
+                <button type='submit' onClick={onSaveHandler}>
                     Save
                 </button>
             </td>

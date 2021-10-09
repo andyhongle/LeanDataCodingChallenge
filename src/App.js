@@ -1,15 +1,16 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UsersTable from "./components/UsersTable/UsersTable";
 import AddUsersForm from "./components/UsersTable/AddUserForm";
-import ExpensesTable from './components/ExpensesTable/ExpensesTable';
-import AddExpenseForm from './components/ExpensesTable/AddExpenseForm';
+import ExpensesTable from "./components/ExpensesTable/ExpensesTable";
+import AddExpenseForm from "./components/ExpensesTable/AddExpenseForm";
 
 function App() {
     const [usersList, setUsersList] = useState([]);
     const [expensesList, setExpensesList] = useState([]);
+    const [latestExpense, setLatestExpense] = useState();
 
-    const addUserHandler = (firstName, lastName, totalExpenses) => {
+    const addUserHandler = (firstName, lastName) => {
         setUsersList((prevUsersList) => {
             return [
                 ...prevUsersList,
@@ -17,9 +18,9 @@ function App() {
                     id: Math.random(),
                     firstName: firstName,
                     lastName: lastName,
-                    totalExpenses: parseInt(0),
+                    fullName: firstName + lastName,
+                    totalExpenses: 0,
                 },
-              
             ];
         });
     };
@@ -45,19 +46,35 @@ function App() {
     };
 
     const addExpenseHandler = (fullName, category, description, cost) => {
-      setExpensesList((prevExpensesList) => {
-        return [
-          ...prevExpensesList,
-          {
-            id: Math.random(),
-            fullName: fullName,
-            category: category,
-            description: description,
-            cost: cost
-          }
-        ]
-      })
-    }
+        setExpensesList((prevExpensesList) => {
+            return [
+                ...prevExpensesList,
+                {
+                    id: Math.random(),
+                    fullName: fullName,
+                    category: category,
+                    description: description,
+                    cost: parseInt(cost),
+                },
+            ];
+        });
+    };
+
+    useEffect(() => {
+        setUsersList((prevUsersList) => {
+            return prevUsersList.map((user) => {
+                let fullName = user.fullName;
+                let sum = 0;
+                for (let expense of expensesList) {
+                    if (fullName === expense.fullName) {
+                        sum += expense.cost;
+                    }
+                }
+                user.totalExpenses = sum;
+                return user;
+            });
+        });
+    }, [expensesList]);
 
     return (
         <div className="App">
@@ -67,8 +84,11 @@ function App() {
                 editUser={editUserHandler}
                 deleteUser={deleteUserHandler}
             />
-            <AddExpenseForm usersList={usersList}/>
-            <ExpensesTable />
+            <AddExpenseForm
+                usersList={usersList}
+                addExpense={addExpenseHandler}
+            />
+            <ExpensesTable expensesList={expensesList} />
         </div>
     );
 }

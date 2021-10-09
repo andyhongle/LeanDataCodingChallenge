@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import ReadUserRow from "./ReadUserRow";
 import EditUserRow from "./EditUserRow";
 
@@ -27,7 +27,7 @@ const UsersTable = (props) => {
                 </thead>
                 <tbody>
                     {props.usersList.map((user, idx) => (
-                        <>
+                        <Fragment key={idx}>
                             {editUserRowID === user.id ? (
                                 <EditUserRow
                                     saveClickHandler={saveClickHandler}
@@ -41,7 +41,7 @@ const UsersTable = (props) => {
                                     deleteUserHandler={props.deleteUserHandler}
                                 />
                             )}
-                        </>
+                        </Fragment>
                     ))}
                 </tbody>
             </table>

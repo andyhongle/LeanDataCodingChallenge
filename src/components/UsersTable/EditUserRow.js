@@ -12,7 +12,7 @@ const EditUserRow = (props) => {
         editLastName(event.target.value);
     };
 
-    const onSaveHandler = (event) => {
+    const onSaveUserHandler = (event) => {
         event.preventDefault();
         if (firstName.trim().length === 0 || lastName.trim().length === 0) {
             setEditError(true);
@@ -23,20 +23,18 @@ const EditUserRow = (props) => {
             id: props.user.id,
             firstName: firstName,
             lastName: lastName,
+            fullName: firstName + ' ' + lastName,
             totalExpenses: props.user.totalExpenses,
         };
         props.editUser(editUserData);
-        props.saveClick(event);
+        props.saveUser(event);
     };
 
-
-
     return (
-        <tr key={props.idx}>
+        <tr>
             <td>
                 <input
                     type="text"
-                    required="required"
                     placeholder="First Name"
                     value={firstName}
                     onChange={changeFNHandler}
@@ -45,7 +43,6 @@ const EditUserRow = (props) => {
             <td>
                 <input
                     type="text"
-                    required="required"
                     placeholder="Last Name"
                     value={lastName}
                     onChange={changeLNHandler}
@@ -53,7 +50,7 @@ const EditUserRow = (props) => {
             </td>
             <td>{props.user.totalExpenses}</td>
             <td>
-                <button type='submit' onClick={onSaveHandler}>
+                <button type="submit" onClick={onSaveUserHandler}>
                     Save
                 </button>
             </td>

@@ -1,6 +1,20 @@
-import React, { Fragment } from 'react';
-import ReadExpenseRow from './ReadExpenseRow';
+import React, { useState, Fragment } from "react";
+import ReadExpenseRow from "./ReadExpenseRow";
+import EditExpenseRow from "./EditExpenseRow";
+
 const ExpensesTable = (props) => {
+    const [editExpenseRowID, setEditExpenseRowID] = useState(null);
+
+    const editExpenseRowHandler = (event, expense) => {
+        event.preventDefault();
+        setEditExpenseRowID(expense.id);
+    };
+
+    const saveExpenseRowHandler = (event) => {
+        event.preventDefault();
+        setEditExpenseRowID(null);
+    };
+
     return (
         <table>
             <thead>
@@ -14,7 +28,20 @@ const ExpensesTable = (props) => {
             <tbody>
                 {props.expensesList.map((expense, idx) => (
                     <Fragment key={idx}>
-                        <ReadExpenseRow expense={expense}/>
+                        {editExpenseRowID === expense.id ? (
+                            <EditExpenseRow
+                                usersList={props.usersList}
+                                expense={expense}
+                                saveExpense={saveExpenseRowHandler}
+                                editExpense={props.editExpense}
+                            />
+                        ) : (
+                            <ReadExpenseRow
+                                expense={expense}
+                                editExpense={editExpenseRowHandler}
+                                deleteExpense={props.deleteExpense}
+                            />
+                        )}
                     </Fragment>
                 ))}
             </tbody>

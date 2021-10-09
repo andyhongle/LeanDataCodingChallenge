@@ -5,12 +5,12 @@ import EditUserRow from "./EditUserRow";
 const UsersTable = (props) => {
     const [editUserRowID, setEditUserRowID] = useState(null);
 
-    const editUserHandler = (event, user) => {
+    const editUserRowHandler = (event, user) => {
         event.preventDefault();
         setEditUserRowID(user.id);
     };
 
-    const saveClickHandler = (event) => {
+    const saveUserRowHandler = (event) => {
         event.preventDefault();
         setEditUserRowID(null);
     };
@@ -29,14 +29,14 @@ const UsersTable = (props) => {
                     <Fragment key={idx}>
                         {editUserRowID === user.id ? (
                             <EditUserRow
-                                saveClick={saveClickHandler}
+                                saveUser={saveUserRowHandler}
                                 editUser={props.editUser}
                                 user={user}
                             />
                         ) : (
                             <ReadUserRow
                                 user={user}
-                                editUser={editUserHandler}
+                                editUser={editUserRowHandler}
                                 deleteUser={props.deleteUser}
                             />
                         )}

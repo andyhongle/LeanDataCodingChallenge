@@ -24,8 +24,10 @@ const AddExpenseForm = (props) => {
     const submitHandler = (event) => {
         event.preventDefault();
         props.addExpense(fullName, category, description, cost)
-        
-
+        setFullName("");
+        setCategory("");
+        setDescription("");
+        setCost(0);
     }
     return (
         <form onSubmit={submitHandler}>
@@ -35,7 +37,7 @@ const AddExpenseForm = (props) => {
                 </option>
                 {props.usersList.map((user, idx) => (
                     <option key={idx} value={user.fullName}>
-                        {user.firstName} {user.lastName}
+                        {user.fullName}
                     </option>
                 ))}
             </select>
@@ -44,8 +46,8 @@ const AddExpenseForm = (props) => {
                     Choose a category
                 </option>
                 <option value="Food">Food</option>
-                <option value="Travel">Travel</option>
                 <option value="Health">Health</option>
+                <option value="Travel">Travel</option>
                 <option value="Supplies">Supplies</option>
             </select>
             <input

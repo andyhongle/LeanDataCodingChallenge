@@ -2,12 +2,12 @@ import React from 'react';
 
 const ReadUserRow = (props) => {
 
-    const onEditClickHandler = (event) => {
+    const onEditHandler = (event) => {
         props.editUser(event, props.user);
     }
 
-    const onDeleteUserHandler = () => {
-        props.deleteUser(props.user.fullName);
+    const onDeleteHandler = () => {
+        props.deleteUser(props.user.id);
     }
 
     return (
@@ -16,10 +16,10 @@ const ReadUserRow = (props) => {
             <td>{props.user.lastName}</td>
             <td>{props.user.totalExpenses}</td>
             <td>
-                <button type='button' onClick={onEditClickHandler}>Edit</button>
+                <button type='button' onClick={onEditHandler}>Edit</button>
             </td>
             <td>
-                <button type='button' onClick={onDeleteUserHandler}>Delete</button>
+                <button type='button' onClick={onDeleteHandler}>Delete</button>
             </td>
         </tr>
     );

@@ -4,11 +4,17 @@ import UsersTable from "./components/UsersTable/UsersTable";
 import AddUsersForm from "./components/UsersTable/AddUserForm";
 import ExpensesTable from "./components/ExpensesTable/ExpensesTable";
 import AddExpenseForm from "./components/ExpensesTable/AddExpenseForm";
+import CompanyTable from "./components/CompanyExpenses/CompanyTable";
 
 function App() {
     const [usersList, setUsersList] = useState([]);
     const [expensesList, setExpensesList] = useState([]);
-    const [latestExpense, setLatestExpense] = useState();
+    const [categoryExpenses, setCategoryExpenses] = useState({
+        Food: 0,
+        Health: 0,
+        Travel: 0,
+        Supplies: 0,
+    });
 
     const addUserHandler = (firstName, lastName) => {
         setUsersList((prevUsersList) => {
@@ -18,7 +24,7 @@ function App() {
                     id: Math.random(),
                     firstName: firstName,
                     lastName: lastName,
-                    fullName: firstName + lastName,
+                    fullName: firstName + " " + lastName,
                     totalExpenses: 0,
                 },
             ];
@@ -60,6 +66,28 @@ function App() {
         });
     };
 
+    const editExpenseHandler = (editExpenseData) => {
+        setExpensesList((prevExpensesList) => {
+            const newExpensesList = [...prevExpensesList];
+            const index = expensesList.findIndex(
+                (expense) => expense.id === editExpenseData.id
+            );
+            newExpensesList[index] = editExpenseData;
+            return newExpensesList;
+        });
+    };
+
+    const deleteExpenseHandler = (expenseId) => {
+        setExpensesList((prevExpensesList) => {
+            const newExpensesList = [...prevExpensesList];
+            const index = expensesList.findIndex(
+                (expense) => expense.id === expenseId
+            );
+            newExpensesList.splice(index, 1);
+            return newExpensesList;
+        });
+    };
+
     useEffect(() => {
         setUsersList((prevUsersList) => {
             return prevUsersList.map((user) => {
@@ -76,6 +104,22 @@ function App() {
         });
     }, [expensesList]);
 
+    useEffect(() => {
+        setCategoryExpenses((prevCategoryExpenses) => {
+            let newCategoryExpenses = { ...prevCategoryExpenses };
+            newCategoryExpenses["Food"] = 0;
+            newCategoryExpenses["Health"] = 0;
+            newCategoryExpenses["Travel"] = 0;
+            newCategoryExpenses["Supplies"] = 0;
+            for (let expense of expensesList) {
+                let category = expense.category;
+                let cost = expense.cost;
+                newCategoryExpenses[category] += cost;
+            }
+            return newCategoryExpenses;
+        });
+    }, [expensesList]);
+
     return (
         <div className="App">
             <AddUsersForm addUser={addUserHandler} />
@@ -88,7 +132,13 @@ function App() {
                 usersList={usersList}
                 addExpense={addExpenseHandler}
             />
-            <ExpensesTable expensesList={expensesList} />
+            <ExpensesTable
+                usersList={usersList}
+                expensesList={expensesList}
+                editExpense={editExpenseHandler}
+                deleteExpense={deleteExpenseHandler}
+            />
+            <CompanyTable categoryExpenses={categoryExpenses} />
         </div>
     );
 }

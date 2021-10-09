@@ -20,9 +20,13 @@ function App() {
     })
   };
 
-
-  const editUserHandler = (firstName, lastName) => {
-
+  const editUserHandler = (editUserData) => {
+    setUsersList((prevUsersList) => {
+      const newUsersList = [...prevUsersList];
+      const index = usersList.findIndex((user => user.id === editUserData.id));
+      newUsersList[index] = editUserData;
+      return newUsersList;
+    })
   }
 
 
@@ -30,7 +34,7 @@ function App() {
   return (
       <div className="App">
           <UsersForm addUser={addUserHandler}/>
-          <UsersTable usersList={usersList}/>
+          <UsersTable editUser={editUserHandler} usersList={usersList}/>
       </div>
   );
 }

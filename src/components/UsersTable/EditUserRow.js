@@ -12,8 +12,6 @@ const EditUserRow = (props) => {
         editLastName(event.target.value);
     };
 
-    const errorHandler = (event) => {};
-
     const onSaveHandler = (event) => {
         event.preventDefault();
         if (firstName.trim().length === 0 || lastName.trim().length === 0) {
@@ -28,8 +26,10 @@ const EditUserRow = (props) => {
             totalExpenses: props.user.totalExpenses,
         };
         props.editUser(editUserData);
-        props.handleSaveClick(event);
+        props.saveClickHandler(event);
     };
+
+
 
     return (
         <tr key={props.idx}>
@@ -52,9 +52,11 @@ const EditUserRow = (props) => {
                 />
             </td>
             <td>filler</td>
-            <button onClick={onSaveHandler} type="submit">
-                Save
-            </button>
+            <td>
+                <button type='button' onClick={onSaveHandler}>
+                    Save
+                </button>
+            </td>
             {editError && <td>Please do not leave first or last name blank</td>}
         </tr>
     );

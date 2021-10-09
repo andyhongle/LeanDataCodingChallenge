@@ -3,7 +3,11 @@ import React from 'react';
 const ReadUserRow = (props) => {
 
     const onEditClickHandler = (event) => {
-        props.handleEditClick(event, props.user);
+        props.editUserHandler(event, props.user);
+    }
+
+    const onDeleteUserHandler = () => {
+        props.deleteUserHandler(props.user.id);
     }
 
     return (
@@ -13,6 +17,9 @@ const ReadUserRow = (props) => {
             <td>{props.user.totalExpenses}</td>
             <td>
                 <button type='button' onClick={onEditClickHandler}>Edit</button>
+            </td>
+            <td>
+                <button type='button' onClick={onDeleteUserHandler}>Delete</button>
             </td>
         </tr>
     );

@@ -5,18 +5,18 @@ import EditUserRow from "./EditUserRow";
 const UsersTable = (props) => {
     const [editUserRowID, setEditUserRowID] = useState(null);
 
-    const handleEditClick = (event, user) => {
+    const editUserHandler = (event, user) => {
         event.preventDefault();
         setEditUserRowID(user.id);
     };
 
-    const handleSaveClick = (event) => {
+    const saveClickHandler = (event) => {
         event.preventDefault();
         setEditUserRowID(null);
     };
 
     return (
-        <div className="users-table-container">
+        <div>
             <table>
                 <thead>
                     <tr>
@@ -30,14 +30,15 @@ const UsersTable = (props) => {
                         <>
                             {editUserRowID === user.id ? (
                                 <EditUserRow
-                                    handleSaveClick={handleSaveClick}
+                                    saveClickHandler={saveClickHandler}
                                     editUser={props.editUser}
                                     user={user}
                                 />
                             ) : (
                                 <ReadUserRow
                                     user={user}
-                                    handleEditClick={handleEditClick}
+                                    editUserHandler={editUserHandler}
+                                    deleteUserHandler={props.deleteUserHandler}
                                 />
                             )}
                         </>
